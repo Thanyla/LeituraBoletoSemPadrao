@@ -1,14 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javaapplication1;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  *
  * @author narizinho
  */
-public class ProcessarBoletos {
-    
+public abstract class ProcessarBoletos {
+    protected abstract List<Boleto> lerArquivo(String nomeArquivo);
+     DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter FORMATO_DATA_HORA = 
+            DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss");
+    public void processar(String nomeArquivo){
+        List<Boleto> boletos = lerArquivo(nomeArquivo);
+        boletos.forEach((boleto) -> {
+            System.out.println("Id: " + boleto.getId()
+                    + " Banco: " + boleto.getCodBanco());
+        });
+    }
 }
