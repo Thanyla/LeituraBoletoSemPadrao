@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author narizinho
  */
 
-public class LeituraRetornoBancoBrasil extends ProcessarBoletos {
+public class ProcessarBoletoBancoBrasil extends ProcessarBoletos {
 
     @Override
     protected List<Boleto> lerArquivo(String nomeArquivo) {
@@ -28,7 +28,7 @@ public class LeituraRetornoBancoBrasil extends ProcessarBoletos {
                 Boleto boleto = new Boleto();
                 boleto.setId(Integer.parseInt(vetor[0]));
                 boleto.setCodBanco(vetor[1]);
-                boleto.setDataVencimento(LocalDate.parse(vetor[2], FORMATO_DATA_HORA));
+                boleto.setDataVencimento(LocalDate.parse(vetor[2], FORMATO_DATA));
                 boleto.setDataPagamento(LocalDate.parse(vetor[3], FORMATO_DATA).atTime(0, 0));
                 boleto.setCpfCliente(vetor[4]);
                 boleto.setValor(Double.parseDouble(vetor[5]));
@@ -37,7 +37,7 @@ public class LeituraRetornoBancoBrasil extends ProcessarBoletos {
                 lista.add(boleto);
             }
         } catch (IOException ex) {
-            Logger.getLogger(LeituraRetornoBancoBrasil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProcessarBoletoBancoBrasil.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return lista;
